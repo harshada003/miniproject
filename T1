@@ -1,0 +1,13 @@
+{
+  "ID": 1,
+  "code": "R1",
+  "price": 541,
+  "departureDate": "2021-01-20T00:00:00",
+  "origin": "MUA",
+  "destination": "LAX",
+  "emptySeats": 0,
+  "train": {
+    "type": "Boeing 787",
+    "totalseats": 200
+  }
+}

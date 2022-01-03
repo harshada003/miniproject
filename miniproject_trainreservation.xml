@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="2fb2dd21-6bc3-4452-982b-1029f4e0fadb" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="miniproject_trainreservationFlow" doc:id="edb1e1ec-248c-470f-b1a3-fa853651b4b1" >
+		<http:listener doc:name="Listener" doc:id="6ca486ab-d009-4523-940f-737e02e18df2" config-ref="HTTP_Listener_config" path="/booking" allowedMethods="POST"/>
+		<ee:transform doc:name="Transform Message" doc:id="c5c2cae3-a3e5-4a3f-889d-ed28c214f52b" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="d505b9d0-1246-4b0b-8445-1d3183192f61" />
+	</flow>
+	<flow name="miniproject_trainreservationFlow1" doc:id="63840767-f9cf-47fa-88bb-2b3ec9bdb385" >
+		<http:listener doc:name="Listener" doc:id="f14d43ba-2809-47b2-9448-9e54497e8d4a" config-ref="HTTP_Listener_config" path="/booking2" allowedMethods="POST"/>
+		<ee:transform doc:name="Transform Message" doc:id="1229bed1-f135-422e-b6b7-bd09db21706b" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="a740574f-a9c0-434f-a123-131bb96617c2" />
+	</flow>
+</mule>
